@@ -1,13 +1,16 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { AppComponent, environment } from './app/';
 import { FIREBASE_PROVIDERS, defaultFirebase } from 'angularfire2';
+import { AppRoutes } from './app/app.routes';
 
 if (environment.production) {
   enableProdMode();
 }
 
 bootstrap(AppComponent, [
+  provideRouter(AppRoutes),
   FIREBASE_PROVIDERS,
   defaultFirebase({
     apiKey: 'AIzaSyCuB1APdu_P4Pxyb0S9Lw9RTb_vMwohBaA',
