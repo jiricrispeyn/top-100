@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { SpotifyService } from './shared';
 
@@ -9,8 +9,8 @@ import { SpotifyService } from './shared';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  providers: ['SpotifyService'],
-  directives: [ROUTER_DIRECTIVES, HTTP_PROVIDERS]
+  providers: [HTTP_PROVIDERS, SpotifyService],
+  directives: [ROUTER_DIRECTIVES]
 })
 export class AppComponent {
   constructor(af: AngularFire) {
