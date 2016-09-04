@@ -7,7 +7,7 @@ import { AddEntryComponent } from './add-entry.component';
 
 describe('Component: AddEntry', () => {
   it('should create an instance', () => {
-    let component = new AddEntryComponent();
+    let component = AddEntryComponent;
     expect(component).toBeTruthy();
   });
 });
