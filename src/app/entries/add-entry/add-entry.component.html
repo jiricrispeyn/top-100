@@ -1,8 +1,26 @@
+<h1>Add new entry</h1>
 <form #addEntryForm="ngForm" *ngIf="entries.length > 0">
-  <div class="form-group" *ngFor="let entry of entries">
-    <label for="song">Song</label>
-    <input type="text" class="form-control" id="song" required
-      [(ngModel)]="entry.song" name="song" >
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Song</th>
+        <th>Artist</th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of entries">
+        <td>{{ entry.index }}</td>
+        <td>
+          <input type="text" class="form-control">
+        </td>
+        <td>
+          <input type="text" class="form-control">
+        </td>
+        <td>{{ entry.score }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-success">Submit</button>
 </form>
