@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../../shared';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ export class AddEntryComponent implements OnInit {
   entries = [];
   private AMOUNT_OF_ENTRIES = 10;
 
-  constructor() { }
+  constructor(private spotifyService: SpotifyService) { }
 
   ngOnInit() {
     for (let index = 0; index < this.AMOUNT_OF_ENTRIES; index++) {
