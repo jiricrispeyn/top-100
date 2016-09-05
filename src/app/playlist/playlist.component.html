@@ -8,11 +8,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let entry of entries | async">
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr *ngFor="let entry of playlist; let i=index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ entry.song }}</td>
+      <td>{{ entry.artist }}</td>
+      <td>{{ entry.score }}</td>
     </tr>
   </tbody>
 </table>
