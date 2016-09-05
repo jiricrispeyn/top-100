@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Song</th>
+      <th>Artist</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of playlist; let i=index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ entry.song }}</td>
+      <td>{{ entry.artist }}</td>
+      <td>{{ entry.score }}</td>
+    </tr>
+  </tbody>
+</table>

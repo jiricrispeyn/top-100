@@ -1,0 +1,31 @@
+<div class="alert alert-success" role="alert" *ngIf="alert">
+  <strong>Well done!</strong> You successfully added an entry.
+</div>
+
+<h1>Add new entry</h1>
+<form [formGroup]="addEntryForm" (ngSubmit)="save(addEntryForm)">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Song</th>
+        <th>Artist</th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody formArrayName="songs">
+      <tr *ngFor="let song of addEntryForm.controls.songs.controls; let i=index" [formGroupName]="i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <input type="text" class="form-control" formControlName="song">
+        </td>
+        <td>
+          <input type="text" class="form-control" formControlName="artist">
+        </td>
+        <td>{{ addEntryForm.controls.songs.length - i }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-success" [disabled]="!addEntryForm.valid">Submit</button>
+  <small *ngIf="!addEntryForm.valid" class="text-danger">All fields are required.</small>
+</form>
