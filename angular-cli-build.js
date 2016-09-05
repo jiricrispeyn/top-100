@@ -18,7 +18,8 @@ module.exports = function(defaults) {
       '@angular/**/*.+(js|js.map)',
       'ng2-bootstrap/**/*.js',
       'angularfire2/**/*.js',
-      'firebase/*.js'
+      'firebase/*.js',
+      'underscore/underscore.js'
     ]
   });
 };
