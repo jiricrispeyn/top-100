@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 
 @Injectable()
 export class SpotifyService {
@@ -7,8 +7,12 @@ export class SpotifyService {
 
   constructor(private http: Http) { }
 
-  search() {
-    this.http.get(`%{this.spotifyUrl}/v1/search`)
+  search(q, type) {
+    let search = new URLSearchParams();
+    search.set('q', q);
+    search.set('type', type);
+
+    return this.http.get(`${this.spotifyUrl}/v1/search`, { search })
       .map(res => res.json());
   }
 

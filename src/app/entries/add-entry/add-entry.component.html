@@ -1,5 +1,5 @@
 <h1>Add new entry</h1>
-<form #addEntryForm="ngForm" *ngIf="entries.length > 0">
+<form [formGroup]="addEntryForm">
   <table class="table">
     <thead>
       <tr>
@@ -9,16 +9,16 @@
         <th>Points</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let entry of entries">
-        <td>{{ entry.index }}</td>
+    <tbody formArrayName="songs">
+      <tr *ngFor="let song of addEntryForm.controls.songs.controls; let i=index" [formGroupName]="i">
+        <th scope="row">{{ i + 1 }}</th>
         <td>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="song">
         </td>
         <td>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="artist">
         </td>
-        <td>{{ entry.score }}</td>
+        <td>{{ addEntryForm.controls.songs.length - i }}</td>
       </tr>
     </tbody>
   </table>

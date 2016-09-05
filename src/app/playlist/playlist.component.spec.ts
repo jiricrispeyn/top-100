@@ -7,7 +7,7 @@ import { PlaylistComponent } from './playlist.component';
 
 describe('Component: Playlist', () => {
   it('should create an instance', () => {
-    let component = new PlaylistComponent();
+    let component = PlaylistComponent;
     expect(component).toBeTruthy();
   });
 });
