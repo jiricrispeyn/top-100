@@ -21,7 +21,7 @@ const packages: any = {
     defaultExtension: 'js',
     main: 'ng2-bootstrap.js'
   },
-  angularfire2: {
+  'angularfire2': {
     defaultExtension: 'js',
     main: 'angularfire2.js'
   }
