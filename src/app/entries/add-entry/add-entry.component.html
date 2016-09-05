@@ -1,5 +1,9 @@
+<div class="alert alert-success" role="alert" *ngIf="alert">
+  <strong>Well done!</strong> You successfully added an entry.
+</div>
+
 <h1>Add new entry</h1>
-<form [formGroup]="addEntryForm">
+<form [formGroup]="addEntryForm" (ngSubmit)="save(addEntryForm)">
   <table class="table">
     <thead>
       <tr>
@@ -22,5 +26,6 @@
       </tr>
     </tbody>
   </table>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" [disabled]="!addEntryForm.valid">Submit</button>
+  <small *ngIf="!addEntryForm.valid" class="text-danger">All fields are required.</small>
 </form>

@@ -1,8 +1,10 @@
+/// <reference path="../../../../typings/browser/ambient/underscore/index.d.ts" />
+declare let _;
+
 import { Component, OnInit } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
-import * as _ from 'lodash';
-import { SpotifyService } from '../../shared';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   moduleId: module.id,
@@ -13,43 +15,47 @@ import { SpotifyService } from '../../shared';
 })
 export class AddEntryComponent implements OnInit {
 
+  entries: FirebaseListObservable<any[]>;
   addEntryForm: FormGroup;
+  alert = false;
   private previousSongs: any = [];
   private AMOUNT_OF_ENTRIES = 10;
 
-  constructor(private fb: FormBuilder, private spotifyService: SpotifyService) { }
+  constructor(private af: AngularFire, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.entries = this.af.database.list('/entries');
+    this.createForm();
+  }
 
+  // save songs and reset form
+  save(form) {
+    this.alert = true;
+    setTimeout(() => this.alert = false, 3000);
+
+    let songs = form.value.songs;
+
+    songs.forEach(song => {
+      this.entries.push({
+        song: song.song,
+        artist: song.artist,
+        score: song.score
+      });
+    });
+
+    this.createForm();
+  }
+
+  // create form with empty songs
+  createForm() {
     this.addEntryForm = this.fb.group({
       songs: this.fb.array([])
     });
 
     this.addSongs(this.AMOUNT_OF_ENTRIES);
-
-    this.previousSongs = this.addEntryForm.value.songs;
-
-    this.addEntryForm.valueChanges
-      .debounceTime(400)
-      .distinctUntilChanged()
-      .flatMap(res => {
-        console.log(res.songs);
-        console.log(this.previousSongs);
-
-        _.map(res.songs, song => {
-          console.log(song);
-          return song;
-        });
-
-        return this.spotifyService.search(res, 'track');
-      })
-      .subscribe(res => console.log(res));
   }
 
-  search(q, type) {
-    this.spotifyService.search(q, type).subscribe(res => console.log(res));
-  }
-
+  // initialize empty song
   private initSong(score) {
     return this.fb.group({
       song: ['', Validators.required],
@@ -58,6 +64,7 @@ export class AddEntryComponent implements OnInit {
     });
   }
 
+  // add amount of empty songs
   private addSongs(amountOfEntries) {
     let score = this.AMOUNT_OF_ENTRIES;
     const control: any = this.addEntryForm.controls['songs'];
